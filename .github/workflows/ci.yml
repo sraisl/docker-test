@@ -11,16 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v6.0.1
+    - uses: actions/checkout@v6.0.2
 
     - name: Extract Docker metadata
       id: meta
-      uses: docker/metadata-action@v6
+      uses: docker/metadata-action@v6.0.0
       with:
         images: ghcr.io/acme/app
 
     - name: Build and push
-      uses: docker/build-push-action@v6
+      uses: docker/build-push-action@v7.1.0
       with:
         context: .
         push: false

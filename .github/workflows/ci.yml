@@ -13,9 +13,16 @@ jobs:
     steps:
     - uses: actions/checkout@v6.0.1
 
-    - name: get metadata
-      uses: docker/metadata-action@v4.0.0
+    - name: Extract Docker metadata
+      id: meta
+      uses: docker/metadata-action@v6
       with:
-        images: ghcr.io/stefanprodan/helloworld
-        tags: "latest"
+        images: ghcr.io/acme/app
 
+    - name: Build and push
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: false
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
